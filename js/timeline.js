@@ -76,9 +76,11 @@ var cursor = 0;
 				var draggerLeftPosition = -27+ 60 * 15;
 				var time = (900 - ($('#timeline-dragger').offset().left - 535))*15000/900;
 				$('#test').append($('#timeline-dragger').offset().left);
+				$('#timeline-dragger').animate({left:draggerLeftPosition+'px'},time);
 				for (var i = 10;i>=0;i--){
-					$('#timeline-dragger').animate({left:draggerLeftPosition+'px'},time);
 					$('#timeline-dragger').animate({left:'33px'},300);
+					$('#timeline-dragger').animate({left:draggerLeftPosition+'px'},15000);
+					
 				}
 				
 				var nowPoint = $('#timeline-dragger').offset().left;
@@ -129,7 +131,11 @@ var cursor = 0;
 			var day = myDate.getDate();
 			var tempDay = parseInt(day);
 			var stringDate = month.toString()+'.'+tempDay.toString();
-			$("#timeline-date").text(stringDate);
+			if (cursor == 0 && cursorIssue == 15){
+				$("#timeline-date").text("今天");
+			}else{
+				$("#timeline-date").text(stringDate);
+			}
 			return cursor;
 		};
 		function startFresh(cursor){
@@ -234,7 +240,13 @@ SimpleDrag.prototype = {
 	addEventHandler(document, "mouseup", this._fS);
   },
   Move: function(oEvent) {
-	this.Drag.style.left = oEvent.clientX - this._x + "px";
+  	if (oEvent.clientX < 570 && (oEvent.clientX - this._x ) < 33){
+  		this.Stop();
+  	}else if(oEvent.clientX > 900 && (oEvent.clientX - this._x ) > 873){
+  		this.Stop();
+  	}else {
+		this.Drag.style.left = oEvent.clientX - this._x + "px";
+  	}
 	var fresh1 = setInterval("startFresh("+cursor+")", 10);	
   },
   Stop: function() {
