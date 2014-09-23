@@ -10,6 +10,7 @@
 
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="js/timeline.js"></script>
+
 </head>
 
 <body>
@@ -31,6 +32,10 @@
 		<a href="javascript:void(0)" id="time-player-next"></a>
 	</div>
 </div>	
-<text style="color:white" id='test'></text>
+<!-- 此DIV在部署的时候应该设为隐藏属性，用来传递数据 -->
+<text style="color:white;visibility:hidden" id='hide_date'></text>
+	<script>
+	new SimpleDrag("timeline-dragger");
+	</script>
 </body>
 </html>

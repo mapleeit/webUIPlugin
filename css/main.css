@@ -4,8 +4,8 @@ body {
 #timeline {
 	width: 1055px;
 	position: absolute;
-	left: 502px;/*调整位置时只需要调整这个这个数据即可*/
-	top: 50px;/*调整位置时只需要调整这个这个数据即可*/
+/*	left: 502px;
+	top: 50px;*/
 }
 #timeline-rail {
 	position: relative;
