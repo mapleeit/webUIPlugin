@@ -17,7 +17,7 @@
 	 * 初始化游标
 	 */	
 	var cursor = 0,
-		cursorIssue = 0;
+		cursorIssue = 0; // cursorIssue : 0 - 14
 	/*
 	 * privateFunc : 私有函数 -> 只能被匿名函数内部调用
 	 */
@@ -124,15 +124,17 @@
 		var day = parseInt(myDate.getDate());
 		var stringDate = month.toString() + '.' + day.toString();
 
-		if (cursor == 0 && cursorIssue == options.daysNo){
+		if ((cursor + cursorIssue) == options.daysNo - 1){
 			$("#timeline-date").text("今天");
 		}else{
 			$("#timeline-date").text(stringDate);
 		}
+		// 保存时间
+		saveDate(arg);
 	}
 	/*
 	 * saveDate : 将目前dragger所在位置的时间的时间戳挂载到目标div上作为输出端口
-	 * 输出 ：timelineOutDate
+	 * 输出 ：data() : timeline2 : timelineOutDate
 	 */
 	var saveDate = function(arg){
 		var options = arg.data().timeline2;
@@ -140,7 +142,66 @@
 		var myDate = new Date();
 		myDate.setDate(myDate.getDate()- (options.daysNo - cursorIssue - cursor - 1));
 
-		arg.data('timelineOutDate', myDate);
+		$.extend(options, {'timelineOutDate': myDate});
+	}
+	/*
+	 * liClick : 绑定li元素的点击事件
+	 */
+	var liClick = function(arg){
+		var liArray = arg.find("li");
+		var dragger = arg.find("#timeline-dragger");
+
+		liArray.click(function(){
+			// this.id : 'data8' -> this.id.slice(4) : '8'
+			var clickPos = this.id.slice(4);
+			var shiftDis = (clickPos - cursorIssue) * unitWidth;
+			dragger.animate({left : '+=' + shiftDis});	
+			// update cursorIssue
+			cursorIssue = clickPos;
+			printDateBar(arg);
+		});
+	}
+	/*
+	 * preClick : 绑定pre按钮的点击事件
+	 */
+	var preClick = function(arg){
+		var preBtn = arg.find("#time-player-prev");
+		var dragger = arg.find("#timeline-dragger");
+		preBtn.click(function(){
+			if (cursorIssue <= 0) {
+				cursor -= 1;
+				printDateBar(arg);
+				printDateSeries(arg);
+			}else{
+				dragger.animate({left : '-=' + unitWidth});
+				cursorIssue -= 1;
+				printDateBar(arg);	
+			}
+		});
+	}
+	/*
+	 * nextClick : 绑定next按钮的点击事件
+	 */
+	var nextClick = function(arg){
+		var nextBtn = arg.find("#time-player-next");
+		var dragger = arg.find("#timeline-dragger");
+		nextBtn.click(function(){
+			if (cursorIssue >= 14) {
+				cursor += 1;
+				printDateBar(arg);
+				printDateSeries(arg);
+			}else{
+				dragger.animate({left : '+=' + unitWidth});
+				cursorIssue += 1;
+				printDateBar(arg);
+			}
+		})
+	}
+	/*
+	 * playClick : 绑定play按钮的点击事件
+	 */
+	var playClick = function(arg){
+		// alert("i'm playClick!");
 	}
 	/*
 	 * methods : 提供外部可以访问的函数接口
@@ -209,6 +270,13 @@
 
 		save : function(){
 			saveDate($(this));
+		},
+
+		bindClickEvent : function(){
+			liClick($(this));
+			preClick($(this));
+			nextClick($(this));
+			playClick($(this));
 		}
 	}
 
