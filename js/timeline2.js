@@ -159,6 +159,7 @@
 			// update cursorIssue
 			cursorIssue = clickPos;
 			printDateBar(arg);
+			arg.data().timeline2.callback();
 		});
 	}
 	/*
@@ -172,10 +173,12 @@
 				cursor -= 1;
 				printDateBar(arg);
 				printDateSeries(arg);
+				arg.data().timeline2.callback();
 			}else{
 				dragger.animate({left : '-=' + unitWidth});
 				cursorIssue -= 1;
 				printDateBar(arg);	
+				arg.data().timeline2.callback();
 			}
 		});
 	}
@@ -190,10 +193,12 @@
 				cursor += 1;
 				printDateBar(arg);
 				printDateSeries(arg);
+				arg.data().timeline2.callback();
 			}else{
 				dragger.animate({left : '+=' + unitWidth});
 				cursorIssue += 1;
 				printDateBar(arg);
+				arg.data().timeline2.callback();
 			}
 		})
 	}
@@ -201,7 +206,11 @@
 	 * playClick : 绑定play按钮的点击事件
 	 */
 	var playClick = function(arg){
-		// alert("i'm playClick!");
+		var playBtn = arg.find("#time-player-play");
+		var dragger = arg.find("#timeline-dragger");
+		playBtn.click(function(){
+			console.log(arg.data().timeline2.callback());
+		});
 	}
 	/*
 	 * methods : 提供外部可以访问的函数接口
@@ -230,7 +239,7 @@
 						 */						
 						daysNo : 15,
 						callback : function(){
-							console.log(width);
+							console.log(cursorIssue);
 						}
 					}
 

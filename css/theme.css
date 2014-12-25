@@ -22,7 +22,7 @@ body {
 }
 #timeline-rail-right {
 	position: absolute;
-	/*margin-left: 900px; /*这个需要根据时间进行自适应*/*/
+	/*margin-left: 900px; /*这个需要根据时间进行自适应*/
 	background-repeat: no-repeat;
 	background-image: url("../images/timeline-rail-right.png");
 }

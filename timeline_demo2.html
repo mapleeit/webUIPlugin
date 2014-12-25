@@ -11,16 +11,19 @@
 </head>
 
 <body>
-	<!-- <div id="timeline"></div> -->
+	<div id="myInput" style="width:200px;height:20px;color:white"></div>
 	<div style="width:400px;height:300px;float:left"></div>
 	<div id="timeline" style="width:40px;height:20px;background-color:rgb(29, 59, 115);float:left"></div>
 
 	<script type="text/javascript">
 		
-		$("#timeline").timeline2('init', {width:1037, height:69, daysNo : 15}); // 用户给的宽度
-		// console.log($("#timeline").data());
+		$("#timeline").timeline2('init', {width:1037, height:69, daysNo : 15, 
+		callback : function(){
+			var content = $("#timeline").data().timeline2.timelineOutDate;
+			$("#myInput").html(content);
+		}
+		}); // 用户给的宽度
 		$("#timeline").timeline2('draw');
-		// $("#timeline").timeline2('save');
 		$("#timeline").timeline2('bindClickEvent');
 	</script>
 </body>
