@@ -19,6 +19,11 @@
 	var cursor = 0,
 		cursorIssue = 0; // cursorIssue : 0 - 14
 	/*
+	 * 定义全局变量
+	 */
+	var monitor,
+		initLeftPos;
+	/*
 	 * privateFunc : 私有函数 -> 只能被匿名函数内部调用
 	 */
 	var privateFunc = function(){
@@ -206,11 +211,45 @@
 	 * playClick : 绑定play按钮的点击事件
 	 */
 	var playClick = function(arg){
+		var options = arg.data().timeline2;
 		var playBtn = arg.find("#time-player-play");
 		var dragger = arg.find("#timeline-dragger");
+		/*
+		 * 计算dragger在最左边时候的距离浏览器左边缘的距离，用于后续确定cursorIssue使用
+		 */	
+		initLeftPos = dragger.offset().left - cursorIssue * unitWidth;
+
 		playBtn.click(function(){
-			console.log(arg.data().timeline2.callback());
+			var time = (14 - cursorIssue) * options.shiftTime / 14; 
+			var shiftDis = (14 - cursorIssue) * unitWidth;
+			dragger.animate({left : '+=' + shiftDis}, time);
+			monitor = setInterval(fresh, 100, initLeftPos, dragger, arg);
 		});
+	}
+	/*
+	 * stopClick : 绑定stop按钮的点击事件
+	 */
+	var stopClick = function(arg){
+		var stopBtn = arg.find("#time-player-stop");
+		var dragger = arg.find("#timeline-dragger");
+		stopBtn.click(function(){
+			dragger.stop(true);
+			var nowPos = cursorIssue * unitWidth;
+			dragger.animate({left : nowPos + "px"});
+			clearInterval(monitor);
+		});
+	}
+	/*
+	 * fresh : 刷新获得实时时间
+	 */
+	var fresh = function(initLeftPos, dragger, arg){
+		var nowPos = dragger.offset().left;
+		cursorIssue = Math.round((nowPos - initLeftPos) / unitWidth);
+		printDateBar(arg);
+		arg.data().timeline2.callback();
+		if (cursorIssue >= 14) {
+			clearInterval(monitor);
+		};
 	}
 	/*
 	 * methods : 提供外部可以访问的函数接口
@@ -238,6 +277,10 @@
 						 * daysNo : 默认天数 
 						 */						
 						daysNo : 15,
+						/*
+						 * shiftTime : 默认从头移动到尾部时间 
+						 */		
+						shiftTime : 15000, // 15s
 						callback : function(){
 							console.log(cursorIssue);
 						}
@@ -286,6 +329,7 @@
 			preClick($(this));
 			nextClick($(this));
 			playClick($(this));
+			stopClick($(this));
 		}
 	}
 
