@@ -1,0 +1,3 @@
+# 3D Earth  
+## iminate the http://experilous.com/1/blog/post/procedural-planet-generation  
+## processing...
