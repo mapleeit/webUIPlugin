@@ -62,7 +62,7 @@ you can use this code to get the date which the dragger is exactly on :
 `var result = $("#timeline").data().timeline2.timelineOutDate;`
 
 ## Problem to solve 
-- the dragger can not be dragged by the mouse.
+- nothing
 
 ## Question
   Please email mel if you have any question about this plugin:
