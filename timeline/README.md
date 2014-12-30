@@ -62,8 +62,7 @@ you can use this code to get the date which the dragger is exactly on :
 `var result = $("#timeline").data().timeline2.timelineOutDate;`
 
 ## Problem to solve 
-- can not use two timeline plugins in one web application.  
-- all the css style use the 'id' to locate the element which is not a good idea
+- the dragger can not be dragged by the mouse.
 
 ## Question
   Please email mel if you have any question about this plugin:

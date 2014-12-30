@@ -240,6 +240,40 @@
 			clearInterval(options.monitor);
 		};
 	}
+
+
+	/*
+	 * mouseDrag : 鼠标拖拽模块
+	 */
+	var mouseDrag = function(arg){
+		var dx,
+			dy,
+			isMove = 0;
+		var options = arg.data().timeline;
+		var dragger = arg.find(".timeline-dragger");
+		// 全局记录鼠标的坐标
+		$(document).mousemove(function(event){
+			var eX = event.pageX;
+			// console.log(eX);
+			if (isMove && eX > (options.initLeftPos + options.unitWidth / 2) && eX < (options.initLeftPos + options.unitWidth * (options.daysNo - 1 / 2))) {
+				dragger.css({'left':eX-dx});
+				options.mouseMonitor = setInterval(fresh, 100, options.initLeftPos, dragger, arg);	
+			};
+		});
+		// 对dragger进行操作
+		dragger.mousedown(function(event){
+			// console.log(this);
+			isMove = 1;
+			dx=event.pageX-parseInt($(this).css("left"));
+		}).mouseup(function(event){
+			isMove = 0;
+			var nowPos = options.cursorIssue * options.unitWidth;
+			dragger.animate({left : nowPos + "px"});
+			clearInterval(options.mouseMonitor);
+		})
+	}
+
+
 	/*
 	 * methods : 提供外部可以访问的函数接口
 	 */
@@ -295,6 +329,7 @@
 						 */
 						monitor : 0,
 						initLeftPos : 0,
+						mouseMonitor : 0,
 						/******* 内部使用的参数 *******/
 						callback : function(){
 							console.log(this.cursorIssue);
@@ -318,22 +353,12 @@
 				$this.removeData('timeline');
 			})
 		},
-		/*
-		 * val : 其他函数
-		 */
-		val : function(options){
-			var someValue = this.eq(0).html();
-			return someValue;
-		},
-
-		show : function(){
-			alert("i'm show!");
-		},
 
 		draw : function(){
 			printTimeline($(this));
 			printDateSeries($(this));
 			printDateBar($(this));
+			mouseDrag($(this));
 		},
 
 		save : function(){
@@ -371,3 +396,5 @@
 	}
 	
 })(jQuery);
+
+
