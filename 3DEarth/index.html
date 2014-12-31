@@ -21,97 +21,100 @@
 		/*
 		 * 长方体
 		 */
-		var scene = new THREE.Scene();
-		var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100);
-		var renderer = new THREE.WebGLRenderer();
-		renderer.setSize(window.innerWidth, window.innerHeight);
-		document.body.appendChild(renderer.domElement);
-		var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+		// var scene = new THREE.Scene();
+		// var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100);
+		// var renderer = new THREE.WebGLRenderer();
+		// renderer.setSize(window.innerWidth, window.innerHeight);
+		// document.body.appendChild(renderer.domElement);
+		// var geometry = new THREE.BoxGeometry( 1, 1, 1 );
 
 
-		var material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe : true } );
+		// var material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe : true } );
 		
-		var cube = new THREE.Mesh( geometry, material );
+		// var cube = new THREE.Mesh( geometry, material );
 
-		cube.rotation.x = 1;
-		cube.rotation.y = 1;
+		// cube.rotation.x = 1;
+		// cube.rotation.y = 1;
 
-		scene.add( cube );
+		// scene.add( cube );
 
-		camera.position.z = 3;
+		// camera.position.z = 3;
 
 
 
-		function render() {
-			requestAnimationFrame( render );
-			renderer.render( scene, camera );
-		}
-		render();
+		// function render() {
+		// 	requestAnimationFrame( render );
+		// 	renderer.render( scene, camera );
+		// }
+		// render();
 		/*
 		 * 球
 		 */
-		 // var renderer;
-		 // function initThree(){
-		 // 	width = document.getElementById('canvas3d').clientWidth;
-		 // 	height = document.getElementById('canvas3d').clientHeight;
-		 // 	renderer = new THREE.WebGLRenderer({antialias : true});
-		 // 	renderer.setSize(width, height);
+		 var renderer;
+		 function initThree(){
+		 	width = document.getElementById('canvas3d').clientWidth;
+		 	height = document.getElementById('canvas3d').clientHeight;
+		 	renderer = new THREE.WebGLRenderer({antialias : true});
+		 	renderer.setSize(width, height);
 		 	
-		 // 	// console.log(renderer);
+		 	// console.log(renderer);
 
-		 // 	document.getElementById('canvas3d').appendChild(renderer.domElement);
-		 // 	renderer.setClearColor(0xFFFFFF, 1.0);
-		 // }
-		 // var camera;
-		 // function initCamera(){
-		 // 	camera = new THREE.PerspectiveCamera(45, width/height, 1, 5000);
-		 // 	// camera = new THREE.OrthographicCamera(width, width, height , height, 1, 1000);
-		 // 	camera.position.x = 0;
-		 // 	camera.position.y = 50;
-		 // 	camera.position.z = 100;
-		 // 	camera.up.x = 0;
-		 // 	camera.up.y = 1;
-		 // 	camera.up.z = 0;
-		 // 	camera.lookAt({x : 0, y : 0, z : 0}); // 视野中心坐标
-		 // }
-		 // var scene;
-		 // function initScene(){
-		 // 	scene = new THREE.Scene();
-		 // }
-		 // var light;
-		 // function initLight(){
-		 // 	light = new THREE.DirectionalLight(0xffffff, 0.5); // 白光，光强一半
-		 // 	light.position.set(0, 1, 0); // 从正上方照射
-		 // 	scene.add(light);
-		 // }
-		 // var sphere;
-		 // function initObject(){
-		 // 	sphere = new THREE.Mesh(
-		 // 		new THREE.SphereGeometry(40, 40, 40),
-		 // 		new THREE.MeshLambertMaterial({color : 0xff00ff, emissive : 0x000000, wireframe : true}) // Lambert : color--漫反射出来的颜色，而不是灯光的颜色。即：无镜面反射。emissive--当没有光照射时候展现的颜色，默认为黑。wireframe--是否将渲染时候用到的三角形的线显示出来
-		 // 	);
-		 // 	scene.add(sphere);
-		 // 	sphere.position.set(0, 0, 0);
-		 // };
+		 	document.getElementById('canvas3d').appendChild(renderer.domElement);
+		 	renderer.setClearColor(0xFFFFFF, 1.0);
+		 }
+		 var camera;
+		 function initCamera(){
+		 	camera = new THREE.PerspectiveCamera(45, width/height, 1, 5000);
+		 	// camera = new THREE.OrthographicCamera(width, width, height , height, 1, 1000);
+		 	camera.position.x = 0;
+		 	camera.position.y = 50;
+		 	camera.position.z = 100;
+		 	camera.up.x = 0;
+		 	camera.up.y = 1;
+		 	camera.up.z = 0;
+		 	camera.lookAt({x : 0, y : 0, z : 0}); // 视野中心坐标
+		 }
+		 var scene;
+		 function initScene(){
+		 	scene = new THREE.Scene();
+		 }
+		 var light;
+		 function initLight(){
+		 	light = new THREE.DirectionalLight(0xffffff, 0.5); // 白光，光强一半
+		 	light.position.set(0, 1, 0); // 从正上方照射
+		 	scene.add(light);
+		 }
+		 var sphere;
+		 function initObject(){
+		 	sphere = new THREE.Mesh(
+		 		new THREE.SphereGeometry(40, 40, 40),
+		 		new THREE.MeshLambertMaterial({color : 0xff00ff, emissive : 0x000000, wireframe : true, wireframeLinewidth : 1,wireframeLinecap : 'square', vertexColors:THREE.VertexColors}) // Lambert : color--漫反射出来的颜色，而不是灯光的颜色。即：无镜面反射。emissive--当没有光照射时候展现的颜色，默认为黑。wireframe--是否将渲染时候用到的三角形的线显示出来。wireframeLinewidth--线条粗细，默认为1。在windows下无论改为多少都是1.wireframeLinecap--节点形状，在WebGLrenderer时不管用，在Canvasrenderer时候才管用
+		 	);
+		 	scene.add(sphere);
+		 	sphere.position.set(0, 0, 0);
+		 };
 
-		 // function threeStart(){
-		 // 	initThree();
-		 // 	initCamera();
-		 // 	initScene();
-		 // 	initLight();
-		 // 	initObject();
-		 // 	renderer.clear();
-		 // 	renderer.render(scene, camera);
-		 // }
+		 function threeStart(){
+		 	initThree();
+		 	initCamera();
+		 	initScene();
+		 	initLight();
+		 	initObject();
+		 	renderer.clear();
+		 	renderer.render(scene, camera);
+		 }
 	</script>
 	<div id="canvas3d"></div>
 	<script type="text/javascript">
-		// threeStart();
-		// threeStart();
-		// threeStart();
-		// threeStart();
-		// threeStart();
-		// threeStart();
+		threeStart();
+		threeStart();
+		threeStart();
+		threeStart();
+		threeStart();
+		threeStart();
+		threeStart();
+		threeStart();
+		threeStart();
 	</script>
 </body>
 </html>

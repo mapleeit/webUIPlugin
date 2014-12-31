@@ -45,3 +45,5 @@ Lambert是一种没有镜面反射的材料，当带有颜色的光（例如红�
 - color : 漫反射出来的颜色，而不是灯光的颜色。即：无镜面反射。
 - emissive : 当没有光照射时候展现的颜色，默认为黑。
 - wireframe : 是否将渲染时候用到的三角形的线显示出来。
+- wireframeLinewidth : 线条粗细，默认为1。在windows下无论改为多少都是1。
+- wireframeLinecap : 节点形状，在WebGLrenderer时不管用，在Canvasrenderer时候才管用。
