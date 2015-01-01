@@ -64,25 +64,32 @@ for (var k = 0; k < 26; ++k) KEY[ String.fromCharCode(k + 65) ] = k + 65;
 
 $(document).ready(function onDocumentReady()
 {
-	scene = new THREE.Scene();
-	camera = new THREE.PerspectiveCamera(75, 1, 0.2, 2000);
-	renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-	projector = new THREE.Projector();
+	scene = new THREE.Scene(); // 建立场景
+	camera = new THREE.PerspectiveCamera(75, 1, 0.2, 2000); // 透视投影
+	renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); // WebGLRenderer渲染
+	projector = new THREE.Projector(); // ???
 	
-	renderer.setFaceCulling(THREE.CullFaceFront, THREE.FrontFaceDirectionCW);
+	/*
+	 * setFaceCulling(cullFace, frontFace)
+	 */
+	renderer.setFaceCulling(THREE.CullFaceFront, THREE.FrontFaceDirectionCW); // face culling : 面选取，不绘制那些看不到的面以获得更好的性能
 
-	var ambientLight = new THREE.AmbientLight(0xFFFFFF);
-	scene.add(ambientLight);
+	var ambientLight = new THREE.AmbientLight(0xFFFFFF); // 环境光
+	scene.add(ambientLight); // 把环境光加入场景中
 	
-	directionalLight = new THREE.DirectionalLight(0xFFFFFF);
-	directionalLight.position.set(-3, 3, 7).normalize();
-	scene.add(directionalLight);
+	directionalLight = new THREE.DirectionalLight(0xFFFFFF); // 平行光源
+	directionalLight.position.set(-3, 3, 7).normalize(); // ???
+	scene.add(directionalLight); // 把平行光源加入场景中
 
-	requestAnimationFrame(render);
+	requestAnimationFrame(render); // ???
 
-	resetCamera();
-	updateCamera();
-
+	resetCamera(); // ???
+	updateCamera(); // ???
+	/*
+	 * ui={}
+	 * 取到各种dom元素
+	 * 绑定事件
+	 */
 	ui.body = $("body");
 	ui.frame = $("#viewportFrame");
 	ui.rendererElement = $(renderer.domElement);
@@ -130,7 +137,7 @@ $(document).ready(function onDocumentReady()
 	ui.lowDetailButton.click(setSubdivisions.bind(null, 20));
 	ui.mediumDetailButton.click(setSubdivisions.bind(null, 40));
 	ui.highDetailButton.click(setSubdivisions.bind(null, 60));
-	ui.generatePlanetButton.click(generatePlanetAsynchronous);
+	ui.generatePlanetButton.click(generatePlanetAsynchronous); // 渲染地球函数：@generatePlanetAsynchronous()
 	ui.advancedSettingsButton.click(showAdvancedSettings);
 
 	ui.dataPanel = $("#dataPanel");
@@ -232,12 +239,14 @@ $(document).ready(function onDocumentReady()
 
 	//saveToFileSystem(serializePlanetMesh(planet.mesh, "function getPregeneratedPlanetMesh() { return ", "; }\n"));
 
-	window.addEventListener("resize", resizeHandler);
+	window.addEventListener("resize", resizeHandler); // 监听页面是否改变大小了
 	resizeHandler();
 	
-	ui.generatePlanetButton.click();
+	ui.generatePlanetButton.click(); // ???
 });
-
+/*
+ * @setSubdivisions : 
+ */
 function setSubdivisions(subdivisions)
 {
 	if (typeof(subdivisions) === "number" && subdivisions >= 4)
@@ -248,7 +257,7 @@ function setSubdivisions(subdivisions)
 		else if (subdivisions === 40) ui.mediumDetailButton.addClass("toggled");
 		else if (subdivisions === 60) ui.highDetailButton.addClass("toggled");
 		
-		subdivisions = subdivisions.toFixed(0);
+		subdivisions = subdivisions.toFixed(0); // 小数位数为 0 -> 小数化为整数
 		if (ui.detailLevelRange.val() !== subdivisions) ui.detailLevelRange.val(subdivisions);
 		ui.detailLevelLabel.text("Detail Level (" + subdivisions + ")");
 	}
