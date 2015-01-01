@@ -30,7 +30,9 @@ var sunTimeOffset = 0;
 var pressedKeys = {};
 var disableKeys = false;
 var ui = {};
-
+/*
+ * 生成地球所需要的所有配置参数
+ */
 var generationSettings =
 {
 	subdivisions: 20,
@@ -245,7 +247,7 @@ $(document).ready(function onDocumentReady()
 	ui.generatePlanetButton.click(); // ???
 });
 /*
- * @setSubdivisions : 
+ * @setSubdivisions : 设置切割次数，并且在前台显示相关配置
  */
 function setSubdivisions(subdivisions)
 {
@@ -262,7 +264,9 @@ function setSubdivisions(subdivisions)
 		ui.detailLevelLabel.text("Detail Level (" + subdivisions + ")");
 	}
 }
-
+/*
+ * @setDistortionLevel : 设置扭曲程度，把多边形拉变形的程度，并且在前台显示相关配置
+ */
 function setDistortionLevel(distortionLevel)
 {
 	if (typeof(distortionLevel) === "number" && distortionLevel >= 0 && distortionLevel <= 1)
@@ -275,7 +279,9 @@ function setDistortionLevel(distortionLevel)
 		ui.distortionLevelLabel.text("Distortion Level (" + distortionLevel + "%)");
 	}
 }
-
+/*
+ * @setPlateCount : 设置产生特殊颜色块数系数（正相关），并且在前台显示相关配置
+ */
 function setPlateCount(plateCount)
 {
 	if (typeof(plateCount) === "number" && plateCount >= 0)
@@ -287,7 +293,9 @@ function setPlateCount(plateCount)
 		ui.tectonicPlateCountLabel.text(plateCount.toFixed(0));
 	}
 }
-
+/*
+ * @setOceanicRate : 设置海洋比例，并且在前台显示相关配置
+ */
 function setOceanicRate(oceanicRate)
 {
 	if (typeof(oceanicRate) === "number" && oceanicRate >= 0 && oceanicRate <= 1)
@@ -300,7 +308,9 @@ function setOceanicRate(oceanicRate)
 		ui.oceanicRateLabel.text(oceanicRate);
 	}
 }
-
+/*
+ * @setHeatLevel :　设置热度参数，并且在前台显示相关配置
+ */
 function setHeatLevel(heatLevel)
 {
 	if (typeof(heatLevel) === "number" && heatLevel >= 0)
@@ -315,7 +325,9 @@ function setHeatLevel(heatLevel)
 		ui.heatLevelLabel.text(heatLevel);
 	}
 }
-
+/*
+ * @setMoistureLevel : 设置湿度参数，并且在前台显示相关配置
+ */
 function setMoistureLevel(moistureLevel)
 {
 	if (typeof(moistureLevel) === "number" && moistureLevel >= 0)
@@ -330,7 +342,9 @@ function setMoistureLevel(moistureLevel)
 		ui.moistureLevelLabel.text(moistureLevel);
 	}
 }
-
+/*
+ * @setSeed : ???
+ */
 function setSeed(seed)
 {
 	if (!seed) generationSettings.seed = null;
@@ -358,7 +372,10 @@ function setSeed(seed)
 		ui.seedTextBox.val("");
 	}
 }
-
+/*
+ * @generatePlanetAsynchronous : 异步产生地球模型
+ * asynchronous->异步
+ */
 function generatePlanetAsynchronous()
 {
 	var planet;
