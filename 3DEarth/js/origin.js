@@ -373,7 +373,7 @@ function setSeed(seed)
 	}
 }
 /*
- * @generatePlanetAsynchronous : 异步产生地球模型
+ * @generatePlanetAsynchronous : 异步产生地球模型，产生进度条
  * asynchronous->异步
  */
 function generatePlanetAsynchronous()
@@ -422,7 +422,9 @@ function hideAdvancedSettings()
 function Planet()
 {
 }
-
+/*
+ * @generatePlanet : 生成地球核心函数
+ */
 function generatePlanet(icosahedronSubdivision, topologyDistortionRate, plateCount, oceanicRate, heatLevel, moistureLevel, random, action)
 {
 	var planet = new Planet();
@@ -453,7 +455,7 @@ function generatePlanetMesh(icosahedronSubdivision, topologyDistortionRate, rand
 	action.executeSubaction(function(action)
 	{
 		var totalDistortion = Math.ceil(mesh.edges.length * topologyDistortionRate);
-		var remainingIterations = 6;
+		var remainingIterations = 6; // 剩余的迭代次数
 		action.executeSubaction(function(action)
 		{
 			var iterationDistortion = Math.floor(totalDistortion / remainingIterations);
@@ -517,7 +519,9 @@ function generatePlanetMesh(icosahedronSubdivision, topologyDistortionRate, rand
 	
 	action.provideResult(function() { return mesh; });
 }
-
+/*
+ * @genrateIcosahedron : 产生二十面体的点，边，面的数据信息
+ */
 function generateIcosahedron()
 {
 	var phi = (1.0 + Math.sqrt(5.0)) / 2.0;
