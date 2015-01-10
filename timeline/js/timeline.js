@@ -145,7 +145,7 @@
 			var shiftDis = (clickPos - options.cursorIssue) * options.unitWidth;
 			dragger.animate({left : '+=' + shiftDis});	
 			// update cursorIssue
-			options.cursorIssue = clickPos;
+			options.cursorIssue = parseInt(clickPos);
 			printDateBar(arg);
 			arg.data().timeline.callback();
 		});
@@ -179,6 +179,7 @@
 		var options = arg.data().timeline;
 		var nextBtn = arg.find(".time-player-next");
 		var dragger = arg.find(".timeline-dragger");
+
 		nextBtn.click(function(){
 			if (options.cursorIssue >= (options.daysNo - 1) ) {
 				options.cursor += 1;
@@ -186,6 +187,7 @@
 				printDateSeries(arg);
 				arg.data().timeline.callback();
 			}else{
+				console.log("WTF");
 				dragger.animate({left : '+=' + options.unitWidth});
 				options.cursorIssue += 1;
 				printDateBar(arg);
