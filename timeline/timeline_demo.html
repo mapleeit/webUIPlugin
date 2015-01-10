@@ -12,11 +12,17 @@
 
 <body>
 	<div id="myInput" style="width:200px;height:20px;color:white"></div>
-	<div style="width:400px;height:100px;float:left"></div>
-	<div id="timeline" style="width:40px;height:20px;float:left"></div>
-	<div style="clear:both"></div>
-	<div id="timeline0"></div>
-
+	<div style="border-style:solid;border-color:white;margin-top:20px">
+		<div style="color:white;font-size:24px">first example:(定位：左浮动，定义回调函数：左上角显示日期信息)</div>
+		<div style="width:400px;height:100px;float:left;background-color:green;color:white;font-size:20px;text-align:center">a div(float : left)</div>
+		<div id="timeline" style="width:40px;height:20px;float:left"></div>
+		<div style="clear:both"></div>
+	</div>
+	<div style="border-style:solid;border-color:white">
+		<div style="color:white;margin-top:20px;font-size:24px">second example:</div>
+		<div id="timeline0"></div>
+		<div style="clear:both"></div>
+	</div>
 	<script type="text/javascript">
 		
 		$("#timeline").timeline('init', {width:1037, height:69, daysNo : 15, 
