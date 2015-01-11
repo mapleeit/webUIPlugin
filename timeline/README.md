@@ -1,15 +1,15 @@
 # Timeline plugin, a Web UI plugin used jQuery
 
 ## Demo
-http://www.miaozhaofeng.cn/timeline_demo/timeline_demo2.html
+http://www.miaozhaofeng.cn/timeline_demo/timeline_demo.html
 
 ## How to use
-- First, you must reference `jQuery.js`, `timeline2.js` and `theme.js`.
+- First, you must reference `jquery-1.11.1.js`, `timeline.js` and `timeline-main.css`.
   - Code:  
   ```html
-  <link rel="stylesheet" type="text/css" href="css/theme.css">
+  <link rel="stylesheet" type="text/css" href="css/timeline-main.css">
   <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-  <script type="text/javascript" src="js/timeline2.js"></script>
+  <script type="text/javascript" src="js/timeline.js"></script>
   ```
 - Second, you should creat a div with a id. For example : `id = 'timeline'` 
   - Code:
@@ -21,9 +21,9 @@ http://www.miaozhaofeng.cn/timeline_demo/timeline_demo2.html
   ```javascript
   <script type="text/javascript">
 		
-		$("#timeline").timeline2('init', {width:1037, height:69, daysNo : 15, 
+		$("#timeline").timeline('init', {width:1037, height:69, daysNo : 15, 
 		callback : function(){
-			var content = $("#timeline").data().timeline2.timelineOutDate;
+			var content = $("#timeline").data().timeline.timelineOutDate;
 			$("#myInput").html(content);
 		}
 		});
@@ -33,15 +33,15 @@ http://www.miaozhaofeng.cn/timeline_demo/timeline_demo2.html
 - Fourth, draw and bind the buttons and events
   - Code:
   ```javascript
-	$("#timeline").timeline2('draw');
-	$("#timeline").timeline2('bindClickEvent');
+	$("#timeline").timeline('draw');
+	$("#timeline").timeline('bindClickEvent');
 	```
 	
 ## Public functions that you can call
 - init : initilize the div with user's parameters
 - destroy : delete the parameters mounting on the div object
 - draw : draw the pics of the timeline
-- save : save the timelineOutDate to the div object's `data().timeline2`, usually used inside
+- save : save the timelineOutDate to the div object's `data().timeline`, usually used inside
 - bindClickEvent : bind the buttons and the events, usually used inside
 
 ## Parameters you can change (input)
@@ -59,7 +59,7 @@ http://www.miaozhaofeng.cn/timeline_demo/timeline_demo2.html
 
 ### How to use `timelineOutDate`
 you can use this code to get the date which the dragger is exactly on :
-`var result = $("#timeline").data().timeline2.timelineOutDate;`
+`var result = $("#timeline").data().timeline.timelineOutDate;`
 
 ## Problem to solve 
 - nothing
