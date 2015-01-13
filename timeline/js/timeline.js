@@ -66,10 +66,11 @@
 
 		var scale = arg.find(".timeline-scale");
 
+		content = "";
 		for(var i = 0; i < options.daysNo; i++){
-			var content = "<li class='timeline-data" + i + "'></li>";
-			scale.append(content);
+			var content = content + "<li class='timeline-data" + i + "'></li>";
 		}
+		scale.append(content);
 
 		initStyle(arg);
 				
