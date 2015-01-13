@@ -228,6 +228,7 @@
 			var nowPos = options.cursorIssue * options.unitWidth;
 			dragger.animate({left : nowPos + "px"});
 			clearInterval(options.monitor);
+			clearInterval(options.mouseMonitor);
 		});
 	}
 	/*
@@ -247,6 +248,7 @@
 
 	/*
 	 * mouseDrag : 鼠标拖拽模块
+	 * 问题：如果开启鼠标拖拽模块的话，因为要保持拖拽的时候实时刷新，性能会变差很多
 	 */
 	var mouseDrag = function(arg){
 		var dx,
@@ -260,12 +262,13 @@
 			// console.log(eX);
 			if (isMove && eX > (options.initLeftPos + options.unitWidth / 2) && eX < (options.initLeftPos + options.unitWidth * (options.daysNo - 1 / 2))) {
 				dragger.css({'left':eX-dx});
-				options.mouseMonitor = setInterval(fresh, 100, options.initLeftPos, dragger, arg);	
+				if (!options.mouseMonitor) {
+					options.mouseMonitor = setInterval(fresh, 500, options.initLeftPos, dragger, arg);	
+				};
 			};
 		});
 		// 对dragger进行操作
 		dragger.mousedown(function(event){
-			// console.log(this);
 			isMove = 1;
 			dx=event.pageX-parseInt($(this).css("left"));
 		}).mouseup(function(event){
@@ -273,8 +276,13 @@
 			var nowPos = options.cursorIssue * options.unitWidth;
 			dragger.animate({left : nowPos + "px"});
 			clearInterval(options.mouseMonitor);
+			options.mouseMonitor = 0;
 		})
+
 	}
+
+
+
 
 
 	/*
