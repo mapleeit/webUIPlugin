@@ -1,7 +1,7 @@
 # Timeline plugin, a Web UI plugin used jQuery
 
 ## Demo
-http://www.miaozhaofeng.cn/webUI/timeline/timeline_demo.html
+http://www.miaozhaofeng.cn/demo/#/
 
 ## How to use
 - First, you must reference `jquery-1.11.1.js`, `timeline.js` and `timeline-main.css`.
