@@ -616,7 +616,10 @@ function generateIcosahedron()
 	
 	return { nodes: nodes, edges: edges, faces: faces };
 }
-
+/*
+ * @generateSubdividedIcosahedron : 切分二十面体
+ * degree : 划分程度
+ */
 function generateSubdividedIcosahedron(degree)
 {
 	var icosahedron = generateIcosahedron();
